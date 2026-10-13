@@ -34,7 +34,7 @@ namespace Visus.Stl.Data {
                 this IEnumerable<DateTimePoint<TValue>> that,
                 TimeSpan dt,
                 Func<TValue, TValue, TValue> aggregator,
-                TValue nothing = default) {
+                TValue nothing = default(TValue)) {
             if (that != null) {
                 var e = that.GetEnumerator();
 
@@ -56,13 +56,13 @@ namespace Visus.Stl.Data {
                             // Determine whether there are empty bins between
                             // the current one and the one determined by the
                             // current position of the enumerator.
-                            var cnt = (long) ((e.Current.Time - end) / dt);
+                            var cnt = (long) ((e.Current.Time - end).Ticks / dt.Ticks);
                             for (int i = 0; i < cnt; ++i) {
                                 yield return nothing;
                             }
 
                             // Begin a new bin.
-                            begin += (cnt + 1) * dt;
+                            begin += TimeSpan.FromTicks((cnt + 1) * dt.Ticks);
                             end = begin + dt;
                             val = e.Current.Value;
                         }
@@ -129,7 +129,7 @@ namespace Visus.Stl.Data {
                 Func<TInput, DateTime> timeMapper,
                 Func<TInput, TValue> valueMapper,
                 Func<TValue, TValue, TValue> aggregator,
-                TValue nothing = default) {
+                TValue nothing = default(TValue)) {
             _ = timeMapper
                 ?? throw new ArgumentNullException(nameof(timeMapper));
             _ = valueMapper
@@ -156,14 +156,14 @@ namespace Visus.Stl.Data {
                             // Determine whether there are empty bins between
                             // the current one and the one determined by the
                             // current position of the enumerator.
-                            var cnt = (long) ((timeMapper(e.Current) - end)
-                                / dt);
+                            var cnt = (long) ((timeMapper(e.Current) - end).Ticks
+                                / dt.Ticks);
                             for (int i = 0; i < cnt; ++i) {
                                 yield return nothing;
                             }
 
                             // Begin a new bin.
-                            begin += (cnt + 1) * dt;
+                            begin += TimeSpan.FromTicks((cnt + 1) * dt.Ticks);
                             end = begin + dt;
                             val = valueMapper(e.Current);
                         }

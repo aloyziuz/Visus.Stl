@@ -4,7 +4,6 @@
 // <author>Dominik Herr, Christoph Müller</author>
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 
 
 namespace Visus.Stl.Data {
@@ -19,7 +18,7 @@ namespace Visus.Stl.Data {
         /// <summary>
         /// Initialises a new instance.
         /// </summary>
-        public DateTimePoint() : this(DateTime.MinValue, default) { }
+        public DateTimePoint() : this(DateTime.MinValue, default(TValue)) { }
 
         /// <summary>
         /// Initialises a new instance.
@@ -76,7 +75,7 @@ namespace Visus.Stl.Data {
         }
 
         /// <inheritdoc />
-        public bool Equals([AllowNull] DateTimePoint<TValue> other) {
+        public bool Equals(DateTimePoint<TValue> other) {
             if (other != null) {
                 return this.Time.Equals(other.Time)
                     && (((this.Value == null) && (other.Value == null))

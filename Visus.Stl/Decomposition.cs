@@ -74,7 +74,9 @@ namespace Visus.Stl {
             this.Trend = new double[size];
             this.Weights = new double[size];
 
-            Array.Fill(this.Weights, 1);
+            for (int i = 0; i < this.Weights.Length; ++i) {
+                this.Weights[i] = 1;
+            }
         }
         #endregion
 

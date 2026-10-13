@@ -27,7 +27,9 @@ namespace Visus.Stl.Maths {
         public static TValue Clamp<TValue>(this TValue value, TValue min,
                 TValue max) where TValue : IComparable<TValue> {
             if (max.CompareTo(min) < 0) {
-                (min, max) = (max, min);
+                var tmp = min;
+                min = max;
+                max = tmp;
             }
 
             if (value.CompareTo(min) < 0) {
@@ -212,7 +214,9 @@ namespace Visus.Stl.Maths {
         /// <param name="j"></param>
         public static void Swap<T>(this IList<T> list, int i, int j) {
             if (i != j) {
-                (list[i], list[j]) = (list[j], list[i]);
+                var tmp = list[i];
+                list[i] = list[j];
+                list[j] = tmp;
             }
         }
 

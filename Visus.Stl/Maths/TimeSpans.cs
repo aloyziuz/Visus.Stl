@@ -26,16 +26,16 @@ namespace Visus.Stl.Maths {
         /// <summary>
         /// A banking month of 30 days.
         /// </summary>
-        public static readonly TimeSpan Month = 30 * Day;
+        public static readonly TimeSpan Month = TimeSpan.FromDays(30);
 
         /// <summary>
         /// A week.
         /// </summary>
-        public static readonly TimeSpan Week = 7 * Day;
+        public static readonly TimeSpan Week = TimeSpan.FromDays(7);
 
         /// <summary>
         /// A standard, 365-day year.
         /// </summary>
-        public static readonly TimeSpan Year = 365 * Day;
+        public static readonly TimeSpan Year = TimeSpan.FromDays(365);
     }
 }
